@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Conway's Game of Life</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="theme-color" content="#282c34">
+
+        <!-- FONTS & ICONS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <!-- STYLES -->
+        <link rel="stylesheet" href="/styles/main.css">
+
+    </head>
+    <body>
+
+        <!-- CANVAS -->
+        <canvas id="canvas">
+        </canvas>
+
+        <!-- OPTIONS -->
+        <div id="options">
+
+            <!-- STATS -->
+            <div id="stats">
+                Generation: <span id="generation"></span><br>
+                Population: <span id="population"></span>
+            </div>
+
+        </div>
+
+        <!-- SCRIPTS -->
+        <script src="/scripts/drawer.js"></script>
+        <script src="/scripts/game-of-life.js"></script>
+        <script src="/scripts/controller.js"></script>
+
+    </body>
+</html>
