@@ -1,15 +1,17 @@
-
 // Some rules for the game
 const gameRules = {
     default: {
+        name: 'Default rules',
         survive: [2, 3],
         born: [3]
     },
     highLife: {
+        name: 'High life',
         survive: [2, 3],
         born: [3, 6]
     },
     coral: {
+        name: 'Coral',
         survive: [4, 5, 6, 7, 8],
         born: [3]
     }
@@ -29,7 +31,14 @@ class Game {
     ) {
         this.board = new Board(rules, rows, columns, probability);
         this.drawer = drawer;
+        this.drawer.drawBoard(this.board);
         this.interval = interval;
+        this.running = false;
+    }
+
+    toggleCell(row, column) {
+        this.board.toggleCell(row, column);
+        this.drawer.drawBoard(this.board);
     }
 
     sleep() {
@@ -40,12 +49,16 @@ class Game {
     }
 
     async start() {
-        this.drawer.drawBoard(this.board);
-        while (true) {
-            await this.sleep();
+        this.running = true;
+        while (this.running) {
             this.board.nextGeneration();
             this.drawer.drawBoard(this.board);
+            await this.sleep();
         }
+    }
+
+    stop() {
+        this.running = false;
     }
 
 }
@@ -77,6 +90,11 @@ class Board {
             }
             this.matrix.push(array);
         }
+    }
+
+    toggleCell(row, column) {
+        let cell = this.matrix[row][column];
+        this.matrix[row][column] = new Cell(!cell.alive);
     }
 
     getCell(row, column) {

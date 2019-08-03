@@ -13,25 +13,48 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
         <!-- STYLES -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="/styles/main.css">
 
     </head>
     <body>
 
         <!-- CANVAS -->
-        <canvas id="canvas">
-        </canvas>
+        <div id="canvas">
+        </div>
 
         <!-- OPTIONS -->
-        <div id="options">
+        <div id="options" class="w3-row-padding">
 
             <!-- STATS -->
-            <div id="stats">
+            <div id="stats" class="w3-col l2 m4 s6">
                 Generation: <span id="generation"></span><br>
                 Population: <span id="population"></span>
             </div>
 
+            <!-- CONFIGURATION -->
+            <div class="w3-col l2 m4 s6">
+                <label for="configuration" class="w3-label">Initial configuration</label>
+                <select id="configuration" name="configuration" class="w3-select">
+                    <option value="random">Random</option>
+                    <option value="empty">Empty</option>
+                </select>
+            </div>
+
+            <!-- RULES -->
+            <div class="w3-col l2 m4 s6">
+                <label for="rules" class="w3-label">Game rules</label>
+                <select id="rules" name="rules" class="w3-select">
+                </select>
+            </div>
+
         </div>
+
+        <!-- START & STOP -->
+        <button id="start-stop" class="w3-btn w3-card w3-xlarge w3-circle fab">
+            <i class="material-icons">pause</i>
+        </button>
+
 
         <!-- SCRIPTS -->
         <script src="/scripts/drawer.js"></script>

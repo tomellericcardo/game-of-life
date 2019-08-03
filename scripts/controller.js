@@ -1,16 +1,56 @@
+// Game global variable
+var game;
 
-// Get style property by name
-function getStyleValue(name) {
-    let style = getComputedStyle(document.body);
-    return style.getPropertyValue(name);
+
+// Render rules options
+function renderRules() {
+    let select = document.querySelector('#rules');
+    for (let rules in gameRules) {
+        let option = document.createElement('option');
+        option.value = rules;
+        option.innerHTML = gameRules[rules].name;
+        select.appendChild(option);
+    }
+}
+
+// Detect options changes
+function initializeOptions() {
+    document.querySelectorAll('#configuration, #rules').forEach(function(element) {
+        element.addEventListener('change', function() {
+            game.stop();
+            let canvas = document.querySelector('#canvas canvas');
+            document.querySelector('#canvas').removeChild(canvas);
+            document.querySelector('#start-stop i').innerHTML = 'play_arrow';
+            let configuration = document.querySelector('#configuration').value;
+            let rules = document.querySelector('#rules').value;
+            newGame(configuration, gameRules[rules]);
+        });
+    });
+}
+
+// Initialize start button
+function initializeGameStart() {
+    document.querySelector('#start-stop').addEventListener('click', function() {
+        let icon = document.querySelector('#start-stop i');
+        if (game.running) {
+            icon.innerHTML = 'play_arrow';
+            game.stop();
+        } else {
+            icon.innerHTML = 'pause';
+            game.start();
+        }
+    });
 }
 
 
-// Ready page
-document.addEventListener('DOMContentLoaded', function() {
+// Start a new game
+function newGame(configuration, rules) {
+
+    // Canvas creation
+    let canvas = document.createElement('canvas');
+    document.querySelector('#canvas').appendChild(canvas);
 
     // Drawer settings
-    let canvas = document.querySelector('#canvas');
     let padding = 5;
     let backgroundColor = getStyleValue('--background-color');
     let gridColor = getStyleValue('--grid-color');
@@ -37,14 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let statsHeight = document.querySelector('#options').offsetHeight;
 
     // Game settings
-    let rules = gameRules.default;
     let rows = Math.round((pageHeight - statsHeight) / padding);
     let columns = Math.round(pageWidth / padding);
-    let probability = 0.1;
+    let probability = configuration == 'random'? 0.1 : 0;
     let interval = 50;
 
     // Game instantiation
-    const game = new Game(
+    game = new Game(
         rules,
         rows,
         columns,
@@ -53,7 +92,37 @@ document.addEventListener('DOMContentLoaded', function() {
         interval
     );
 
-    // Starting the game
+    // Cell toggling
+    initializeCanvas(canvas, padding);
+
+}
+
+
+// Get style property by name
+function getStyleValue(name) {
+    let style = getComputedStyle(document.body);
+    return style.getPropertyValue(name);
+}
+
+// Cell toggling
+function initializeCanvas(canvas, padding) {
+    canvas.addEventListener('click', function(event) {
+        let row = Math.floor(event.offsetY / padding);
+        let column = Math.floor(event.offsetX / padding);
+        game.toggleCell(row, column);
+    });
+}
+
+// Ready page
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Initialize options
+    renderRules();
+    initializeOptions();
+    initializeGameStart();
+
+    // Automatic game
+    newGame('random', gameRules.default);
     game.start();
 
 });
