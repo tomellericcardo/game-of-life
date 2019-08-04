@@ -41,6 +41,10 @@ class Game {
         this.drawer.drawBoard(this.board);
     }
 
+    setRules(rules) {
+        this.board.setRules(rules);
+    }
+
     sleep() {
         const interval = this.interval;
         return new Promise(function(resolve) {
@@ -51,10 +55,14 @@ class Game {
     async start() {
         this.running = true;
         while (this.running) {
-            this.board.nextGeneration();
-            this.drawer.drawBoard(this.board);
+            this.step();
             await this.sleep();
         }
+    }
+
+    step() {
+        this.board.nextGeneration();
+        this.drawer.drawBoard(this.board);
     }
 
     stop() {
@@ -90,6 +98,10 @@ class Board {
             }
             this.matrix.push(array);
         }
+    }
+
+    setRules(rules) {
+        this.rules = rules;
     }
 
     toggleCell(row, column) {

@@ -13,38 +13,56 @@ function renderRules() {
     }
 }
 
-// Detect options changes
-function initializeOptions() {
-    document.querySelectorAll('#configuration, #rules').forEach(function(element) {
-        element.addEventListener('change', function() {
-            game.stop();
-            let canvas = document.querySelector('#canvas canvas');
-            document.querySelector('#canvas').removeChild(canvas);
-            document.querySelector('#start-stop i').innerHTML = 'play_arrow';
-            let configuration = document.querySelector('#configuration').value;
-            let rules = document.querySelector('#rules').value;
-            newGame(configuration, gameRules[rules]);
-        });
+// Initialize rules options
+function initializeRules() {
+    let rules = document.querySelector('#rules');
+    rules.addEventListener('change', function() {
+        game.setRules(gameRules[rules.value]);
     });
 }
 
-// Initialize start button
-function initializeGameStart() {
+// Initialize action buttons
+function initializeActions() {
+    let playIcon = document.querySelector('#start-stop i');
+    let stepButton = document.querySelector('#step');
+    document.querySelector('#clear').addEventListener('click', function() {
+        playIcon.innerHTML = 'play_arrow';
+        stepButton.classList.remove('w3-disabled');
+        restartGame(false);
+    });
+    document.querySelector('#random').addEventListener('click', function() {
+        playIcon.innerHTML = 'play_arrow';
+        stepButton.classList.remove('w3-disabled');
+        restartGame(true);
+    });
     document.querySelector('#start-stop').addEventListener('click', function() {
-        let icon = document.querySelector('#start-stop i');
         if (game.running) {
-            icon.innerHTML = 'play_arrow';
+            playIcon.innerHTML = 'play_arrow';
+            stepButton.classList.remove('w3-disabled');
             game.stop();
         } else {
-            icon.innerHTML = 'pause';
+            playIcon.innerHTML = 'pause';
+            stepButton.classList.add('w3-disabled');
             game.start();
         }
     });
+    document.querySelector('#step').addEventListener('click', function() {
+        if (!game.running) game.step();
+    });
+}
+
+// Restart game
+function restartGame(random) {
+    if (game.running) game.stop();
+    let canvas = document.querySelector('#canvas canvas');
+    document.querySelector('#canvas').removeChild(canvas);
+    let rules = document.querySelector('#rules').value;
+    newGame(random, gameRules[rules]);
 }
 
 
 // Start a new game
-function newGame(configuration, rules) {
+function newGame(random, rules) {
 
     // Canvas creation
     let canvas = document.createElement('canvas');
@@ -74,12 +92,12 @@ function newGame(configuration, rules) {
     // Page values
     let pageWidth = window.innerWidth;
     let pageHeight = window.innerHeight;
-    let statsHeight = document.querySelector('#options').offsetHeight;
+    let statsHeight = document.querySelector('#actions').offsetHeight;
 
     // Game settings
     let rows = Math.round((pageHeight - statsHeight) / padding);
     let columns = Math.round(pageWidth / padding);
-    let probability = configuration == 'random'? 0.1 : 0;
+    let probability = random ? 0.1 : 0;
     let interval = 50;
 
     // Game instantiation
@@ -113,16 +131,17 @@ function initializeCanvas(canvas, padding) {
     });
 }
 
+
 // Ready page
 document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize options
     renderRules();
-    initializeOptions();
-    initializeGameStart();
+    initializeRules();
+    initializeActions();
 
     // Automatic game
-    newGame('random', gameRules.default);
+    newGame(true, gameRules.default);
     game.start();
 
 });

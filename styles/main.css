@@ -16,6 +16,11 @@ body {
     color: var(--text-color);
 }
 
+/* INPUTS */
+input:focus, select:focus, button:focus {
+    outline: none;
+}
+
 /* BUTTONS */
 button {
     background-color: var(--button-color)!important;
@@ -24,17 +29,23 @@ button {
 
 /* FAB BUTTONS */
 .fab {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 56px;
-    height: 56px;
-    font-size: 30px;
-    padding: 13px;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    margin: 2px;
 }
 
-/* OPTIONS */
-#options {
-    margin: 0;
-    padding: 25px;
+/* STATS */
+#stats {
+    background-color: var(--background-color);
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 5px 10px 10px 10px;
+}
+
+/* ACTIONS */
+#actions {
+    padding: 0 0 10px 10px;
 }
