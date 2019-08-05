@@ -15,10 +15,54 @@ function renderRules() {
 
 // Initialize rules options
 function initializeRules() {
-    let rules = document.querySelector('#rules');
-    rules.addEventListener('change', function() {
-        game.setRules(gameRules[rules.value]);
+    initializeRulesSelection();
+    let modal = document.querySelector('#rules-modal');
+    document.querySelector('#open-rules').addEventListener('click', function() {
+        modal.style.display = 'block';
     });
+    document.querySelector('#close-rules').addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+    document.querySelectorAll('.w3-check').forEach(function(element) {
+        element.addEventListener('change', function() {
+            document.querySelector('#rules').value = 'custom';
+        });
+    });
+    document.querySelector('#confirm-rules').addEventListener('click', function() {
+        game.setRules(getRules());
+        modal.style.display = 'none';
+    });
+}
+
+// Initialize rules selection
+function initializeRulesSelection() {
+    let document.querySelector('#rules');
+    rules.addEventListener('change', function() {
+        if (rules.value != 'custom') {
+            for (let i = 1; i <= 8; i++) {
+                let survive = false;
+                let born = false;
+                if (gameRules[rules.value].survive.includes(i)) survive = true;
+                if (gameRules[rules.value].born.includes(i)) born = true;
+                document.querySelector('#survive-' + i).checked = survive;
+                document.querySelector('#born-' + i).checked = born;
+            }
+        }
+    });
+}
+
+// Get rules values
+function getRules() {
+    let rules = document.querySelector('#rules');
+    if (rules.value == 'custom') {
+        let values = {survive: [], born: []};
+        for (let i = 1; i <= 8; i++) {
+            if (document.querySelector('#survive-' + i).checked) values.survive.push(i);
+            if (document.querySelector('#born-' + i).checked) values.born.push(i);
+        }
+        return values;
+    }
+    return gameRules[rules.value];
 }
 
 // Initialize action buttons
@@ -56,8 +100,7 @@ function restartGame(random) {
     if (game.running) game.stop();
     let canvas = document.querySelector('#canvas canvas');
     document.querySelector('#canvas').removeChild(canvas);
-    let rules = document.querySelector('#rules').value;
-    newGame(random, gameRules[rules]);
+    newGame(random, getRules());
 }
 
 
@@ -70,7 +113,7 @@ function newGame(random, rules) {
 
     // Drawer settings
     let padding = 5;
-    let backgroundColor = getStyleValue('--background-color');
+    let backgroundColor = getStyleValue('--primary-background');
     let gridColor = getStyleValue('--grid-color');
     let cellColor = getStyleValue('--cell-color');
     let targetColor = getStyleValue('--target-color');
@@ -92,10 +135,9 @@ function newGame(random, rules) {
     // Page values
     let pageWidth = window.innerWidth;
     let pageHeight = window.innerHeight;
-    let statsHeight = document.querySelector('#actions').offsetHeight;
 
     // Game settings
-    let rows = Math.round((pageHeight - statsHeight) / padding);
+    let rows = Math.round(pageHeight / padding);
     let columns = Math.round(pageWidth / padding);
     let probability = random ? 0.1 : 0;
     let interval = 50;

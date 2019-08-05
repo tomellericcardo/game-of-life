@@ -29,6 +29,86 @@
         <div id="canvas">
         </div>
 
+        <!-- RULES -->
+        <div id="rules-modal" class="w3-modal">
+            <div class="w3-modal-content">
+
+                <!-- HEADER -->
+                <header class="w3-container w3-center">
+                    <h1 class="w3-xlarge">Rules</h1>
+                </header>
+
+                <!-- CONTENT -->
+                <div class="w3-container">
+
+                    <!-- CLOSE -->
+                    <span id="close-rules" class="w3-button w3-display-topright">
+                        <i class="material-icons">close</i>
+                    </span>
+
+                    <!-- RULES -->
+                    <label for="rules" class="w3-label">Game rules</label>
+                    <select id="rules" name="rules" class="w3-select">
+                    </select>
+
+                    <!-- SURVIVE -->
+                    <h1 class="w3-large">Survive</h1>
+                    <table id="survives">
+                        <tr>
+                            <td><input type="checkbox" id="survive-1" name="survive-1" class="w3-check"></td>
+                            <td><input type="checkbox" id="survive-2" name="survive-2" class="w3-check" checked></td>
+                            <td><input type="checkbox" id="survive-3" name="survive-3" class="w3-check" checked></td>
+                            <td><input type="checkbox" id="survive-4" name="survive-4" class="w3-check"></td>
+                            <td><input type="checkbox" id="survive-5" name="survive-5" class="w3-check"></td>
+                            <td><input type="checkbox" id="survive-6" name="survive-6" class="w3-check"></td>
+                            <td><input type="checkbox" id="survive-7" name="survive-7" class="w3-check"></td>
+                            <td><input type="checkbox" id="survive-8" name="survive-8" class="w3-check"></td>
+                        </tr>
+                        <tr>
+                            <td><center><label for="survive-1">1</label></center></td>
+                            <td><center><label for="survive-2">2</label></center></td>
+                            <td><center><label for="survive-3">3</label></center></td>
+                            <td><center><label for="survive-4">4</label></center></td>
+                            <td><center><label for="survive-5">5</label></center></td>
+                            <td><center><label for="survive-6">6</label></center></td>
+                            <td><center><label for="survive-7">7</label></center></td>
+                            <td><center><label for="survive-8">8</label></center></td>
+                        </tr>
+                    </table>
+
+                    <!-- BORN -->
+                    <h1 class="w3-large">Born</h1>
+                    <table id="born">
+                        <tr>
+                            <td><input type="checkbox" id="born-1" name="born-1" class="w3-check"></td>
+                            <td><input type="checkbox" id="born-2" name="born-2" class="w3-check"></td>
+                            <td><input type="checkbox" id="born-3" name="born-3" class="w3-check" checked></td>
+                            <td><input type="checkbox" id="born-4" name="born-4" class="w3-check"></td>
+                            <td><input type="checkbox" id="born-5" name="born-5" class="w3-check"></td>
+                            <td><input type="checkbox" id="born-6" name="born-6" class="w3-check"></td>
+                            <td><input type="checkbox" id="born-7" name="born-7" class="w3-check"></td>
+                            <td><input type="checkbox" id="born-8" name="born-8" class="w3-check"></td>
+                        </tr>
+                        <tr>
+                            <td><center><label for="born-1">1</label></center></td>
+                            <td><center><label for="born-2">2</label></center></td>
+                            <td><center><label for="born-3">3</label></center></td>
+                            <td><center><label for="born-4">4</label></center></td>
+                            <td><center><label for="born-5">5</label></center></td>
+                            <td><center><label for="born-6">6</label></td>
+                            <td><center><label for="born-7">7</label></td>
+                            <td><center><label for="born-8">8</label></td>
+                        </tr>
+                    </table>
+
+                    <!-- CONFIRM -->
+                    <button id="confirm-rules" class="w3-btn w3-card w3-round w3-margin-top w3-right">Confirm</button>
+
+                </div>
+
+            </div>
+        </div>
+
         <!-- ACTIONS -->
         <div id="actions">
 
@@ -57,13 +137,6 @@
                 <i class="material-icons">redo</i>
             </button>
 
-        </div>
-
-        <!-- RULES -->
-        <div class="w3-container">
-            <label for="rules" class="w3-label">Game rules</label>
-            <select id="rules" name="rules" class="w3-select">
-            </select>
         </div>
 
 

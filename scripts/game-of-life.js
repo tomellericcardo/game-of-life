@@ -10,10 +10,8 @@ const gameRules = {
         survive: [2, 3],
         born: [3, 6]
     },
-    coral: {
-        name: 'Coral',
-        survive: [4, 5, 6, 7, 8],
-        born: [3]
+    custom: {
+        name: 'Custom rules'
     }
 };
 
@@ -43,6 +41,10 @@ class Game {
 
     setRules(rules) {
         this.board.setRules(rules);
+    }
+
+    setPadding(padding) {
+        this.drawer.setPadding(padding);
     }
 
     sleep() {
@@ -75,7 +77,12 @@ class Game {
 // Board class
 class Board {
 
-    constructor(rules, rows, columns, probability) {
+    constructor(
+        rules,
+        rows,
+        columns,
+        probability
+    ) {
         this.rules = rules;
         this.rows = rows;
         this.columns = columns;
@@ -162,7 +169,10 @@ class Board {
 // Cell class
 class Cell {
 
-    constructor(alive, age = 0) {
+    constructor(
+        alive,
+        age = 0
+    ) {
         this.alive = alive;
         this.age = age;
     }

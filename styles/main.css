@@ -1,6 +1,8 @@
 /* VARIABLES */
 :root {
-    --background-color: #282c34;
+    --primary-background: #282c34;
+    --secondary-background: #2c313c;
+    --field-color: #3a3f4b;
     --grid-color: #bfbfbf;
     --cell-color: #ffffff;
     --target-color: #0254d9;
@@ -11,12 +13,29 @@
 /* BODY */
 body {
     margin: 0;
-    background-color: var(--background-color);
+    background-color: var(--primary-background);
     font-family: 'Roboto', sans-serif;
     color: var(--text-color);
 }
 
+/* HEADER */
+header {
+    background-color: var(--primary-background);
+    margin-bottom: 15px;
+}
+
+/* MODAL */
+.w3-modal-content {
+    background-color: var(--secondary-background);
+    padding-bottom: 20px;
+}
+
 /* INPUTS */
+input, select {
+    background-color: var(--field-color);
+    color: var(--text-color);
+}
+
 input:focus, select:focus, button:focus {
     outline: none;
 }
@@ -47,5 +66,9 @@ button {
 
 /* ACTIONS */
 #actions {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     padding: 0 0 10px 10px;
 }

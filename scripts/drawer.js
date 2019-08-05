@@ -21,6 +21,10 @@ class Drawer {
         this.populationElement = populationElement;
     }
 
+    setPadding(padding) {
+        this.padding = padding;
+    }
+
     drawBoard(board) {
         this.clearCanvas(board);
         this.drawGrid(board);
