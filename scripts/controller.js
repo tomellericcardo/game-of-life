@@ -192,6 +192,11 @@ function initializeCanvas(canvas, padding) {
 // Ready page
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Install service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
+    }
+
     // Initialize options
     renderRules();
     initializeRules();
