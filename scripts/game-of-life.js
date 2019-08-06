@@ -25,13 +25,15 @@ class Game {
         columns,
         probability,
         drawer,
-        interval
+        interval,
+        stepCallback
     ) {
         this.board = new Board(rules, rows, columns, probability);
         this.drawer = drawer;
         this.drawer.drawBoard(this.board);
         this.interval = interval;
         this.running = false;
+        this.stepCallback = stepCallback;
     }
 
     toggleCell(row, column) {
@@ -43,8 +45,17 @@ class Game {
         this.board.setRules(rules);
     }
 
-    setPadding(padding) {
-        this.drawer.setPadding(padding);
+    getPadding() {
+        return this.drawer.padding;
+    }
+
+    changePadding() {
+        this.drawer.changePadding();
+        if (!this.running) this.drawer.drawBoard(this.board);
+    }
+
+    getPopulation() {
+        return this.board.population;
     }
 
     sleep() {
@@ -65,6 +76,7 @@ class Game {
     step() {
         this.board.nextGeneration();
         this.drawer.drawBoard(this.board);
+        this.stepCallback(this.board.population);
     }
 
     stop() {

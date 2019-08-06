@@ -36,7 +36,7 @@ function initializeRules() {
 
 // Initialize rules selection
 function initializeRulesSelection() {
-    let document.querySelector('#rules');
+    let rules = document.querySelector('#rules');
     rules.addEventListener('change', function() {
         if (rules.value != 'custom') {
             for (let i = 1; i <= 8; i++) {
@@ -67,17 +67,22 @@ function getRules() {
 
 // Initialize action buttons
 function initializeActions() {
+    let fillIcon = document.querySelector('#clear-fill i');
     let playIcon = document.querySelector('#start-stop i');
     let stepButton = document.querySelector('#step');
-    document.querySelector('#clear').addEventListener('click', function() {
-        playIcon.innerHTML = 'play_arrow';
-        stepButton.classList.remove('w3-disabled');
-        restartGame(false);
+    document.querySelector('#zoom').addEventListener('click', function() {
+        game.changePadding();
     });
-    document.querySelector('#random').addEventListener('click', function() {
+    document.querySelector('#clear-fill').addEventListener('click', function() {
         playIcon.innerHTML = 'play_arrow';
         stepButton.classList.remove('w3-disabled');
-        restartGame(true);
+        if (game.getPopulation() == 0) {
+            fillIcon.innerHTML = 'clear';
+            restartGame(true);
+        } else {
+            fillIcon.innerHTML = 'casino';
+            restartGame(false);
+        }
     });
     document.querySelector('#start-stop').addEventListener('click', function() {
         if (game.running) {
@@ -109,10 +114,11 @@ function newGame(random, rules) {
 
     // Canvas creation
     let canvas = document.createElement('canvas');
-    document.querySelector('#canvas').appendChild(canvas);
+    let canvasContainer = document.querySelector('#canvas');
+    canvasContainer.appendChild(canvas);
 
     // Drawer settings
-    let padding = 5;
+    let padding = 4;
     let backgroundColor = getStyleValue('--primary-background');
     let gridColor = getStyleValue('--grid-color');
     let cellColor = getStyleValue('--cell-color');
@@ -135,6 +141,7 @@ function newGame(random, rules) {
     // Page values
     let pageWidth = window.innerWidth;
     let pageHeight = window.innerHeight;
+    canvasContainer.style.height = pageHeight + 'px';
 
     // Game settings
     let rows = Math.round(pageHeight / padding);
@@ -149,7 +156,8 @@ function newGame(random, rules) {
         columns,
         probability,
         drawer,
-        interval
+        interval,
+        stepCallback
     );
 
     // Cell toggling
@@ -164,11 +172,18 @@ function getStyleValue(name) {
     return style.getPropertyValue(name);
 }
 
+// Step callback function
+function stepCallback(population) {
+    let icon = document.querySelector('#clear-fill i');
+    if (population == 0) icon.innerHTML = 'casino';
+    else icon.innerHTML = 'clear';
+}
+
 // Cell toggling
 function initializeCanvas(canvas, padding) {
     canvas.addEventListener('click', function(event) {
-        let row = Math.floor(event.offsetY / padding);
-        let column = Math.floor(event.offsetX / padding);
+        let row = Math.floor(event.offsetY / game.getPadding());
+        let column = Math.floor(event.offsetX / game.getPadding());
         game.toggleCell(row, column);
     });
 }

@@ -21,8 +21,9 @@ class Drawer {
         this.populationElement = populationElement;
     }
 
-    setPadding(padding) {
-        this.padding = padding;
+    changePadding() {
+        if (this.padding > 12) this.padding = 4;
+        else this.padding += 2;
     }
 
     drawBoard(board) {

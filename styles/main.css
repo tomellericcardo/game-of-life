@@ -46,7 +46,6 @@ button {
     color: var(--text-color)!important;
 }
 
-/* FAB BUTTONS */
 .fab {
     width: 50px;
     height: 50px;
@@ -56,13 +55,17 @@ button {
 
 /* STATS */
 #stats {
-    background-color: var(--background-color);
+    background-color: var(--primary-background);
     opacity: 0.8;
     position: fixed;
     top: 0;
     left: 0;
     padding: 5px 10px 10px 10px;
 }
+
+/* CANVAS */
+#canvas {position: relative;}
+canvas {position: absolute;}
 
 /* ACTIONS */
 #actions {

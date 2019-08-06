@@ -19,14 +19,14 @@
     </head>
     <body>
 
+        <!-- CANVAS -->
+        <div id="canvas">
+        </div>
+
         <!-- STATS -->
         <div id="stats">
             Generation: <b><span id="generation"></span></b><br>
             Population: <b><span id="population"></span></b>
-        </div>
-
-        <!-- CANVAS -->
-        <div id="canvas">
         </div>
 
         <!-- RULES -->
@@ -54,6 +54,8 @@
                     <!-- SURVIVE -->
                     <h1 class="w3-large">Survive</h1>
                     <table id="survives">
+
+                        <!-- CHECKBOXES -->
                         <tr>
                             <td><input type="checkbox" id="survive-1" name="survive-1" class="w3-check"></td>
                             <td><input type="checkbox" id="survive-2" name="survive-2" class="w3-check" checked></td>
@@ -64,6 +66,8 @@
                             <td><input type="checkbox" id="survive-7" name="survive-7" class="w3-check"></td>
                             <td><input type="checkbox" id="survive-8" name="survive-8" class="w3-check"></td>
                         </tr>
+
+                        <!-- LABELS -->
                         <tr>
                             <td><center><label for="survive-1">1</label></center></td>
                             <td><center><label for="survive-2">2</label></center></td>
@@ -79,6 +83,8 @@
                     <!-- BORN -->
                     <h1 class="w3-large">Born</h1>
                     <table id="born">
+
+                        <!-- CHECKBOXES -->
                         <tr>
                             <td><input type="checkbox" id="born-1" name="born-1" class="w3-check"></td>
                             <td><input type="checkbox" id="born-2" name="born-2" class="w3-check"></td>
@@ -89,6 +95,8 @@
                             <td><input type="checkbox" id="born-7" name="born-7" class="w3-check"></td>
                             <td><input type="checkbox" id="born-8" name="born-8" class="w3-check"></td>
                         </tr>
+
+                        <!-- LABELS -->
                         <tr>
                             <td><center><label for="born-1">1</label></center></td>
                             <td><center><label for="born-2">2</label></center></td>
@@ -99,6 +107,7 @@
                             <td><center><label for="born-7">7</label></td>
                             <td><center><label for="born-8">8</label></td>
                         </tr>
+
                     </table>
 
                     <!-- CONFIRM -->
@@ -114,17 +123,17 @@
 
             <!-- RULES -->
             <button id="open-rules" class="w3-btn w3-card w3-xlarge w3-circle fab">
-                <i class="material-icons">list</i>
+                <i class="material-icons">settings</i>
+            </button>
+
+            <!-- ZOOM -->
+            <button id="zoom" class="w3-btn w3-card w3-xlarge w3-circle fab">
+                <i class="material-icons">search</i>
             </button>
 
             <!-- CLEAR -->
-            <button id="clear" class="w3-btn w3-card w3-xlarge w3-circle fab">
+            <button id="clear-fill" class="w3-btn w3-card w3-xlarge w3-circle fab">
                 <i class="material-icons">close</i>
-            </button>
-
-            <!-- RANDOM -->
-            <button id="random" class="w3-btn w3-card w3-xlarge w3-circle fab">
-                <i class="material-icons">shuffle</i>
             </button>
 
             <!-- START & STOP -->
