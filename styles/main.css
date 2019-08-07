@@ -64,8 +64,15 @@ button {
 }
 
 /* CANVAS */
-#canvas {position: relative;}
 canvas {position: absolute;}
+#canvas {
+    position: relative;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 400px) {
+    #canvas {overflow: scroll;}
+}
 
 /* ACTIONS */
 #actions {

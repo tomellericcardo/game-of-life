@@ -22,7 +22,7 @@ class Drawer {
     }
 
     changePadding() {
-        if (this.padding > 12) this.padding = 4;
+        if (this.padding > 10) this.padding = 4;
         else this.padding += 2;
     }
 
